@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="QuantFinance Lab - Dashboard financiero profesional interactivo para la optimización de recursos, pronósticos de precios y toma de decisiones.">
+    <title>QuantFinance Lab - Dashboard Financiero Cuantitativo</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- Sidebar Menu -->
+        <aside class="sidebar">
+            <div class="sidebar-brand d-flex align-items-center gap-2">
+                <i class="bi bi-cpu-fill"></i>
+                <span>QuantFinance Lab</span>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a class="menu-item active" data-target="dashboard-section" id="nav-dashboard">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        <span>Dashboard Principal</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-item" data-target="optimization-section" id="nav-optimization">
+                        <i class="bi bi-pie-chart-fill"></i>
+                        <span>Optimización de Recursos</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-item" data-target="forecasting-section" id="nav-forecasting">
+                        <i class="bi bi-graph-up-arrow"></i>
+                        <span>Pronósticos</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-item" data-target="decisions-section" id="nav-decisions">
+                        <i class="bi bi-diagram-3-fill"></i>
+                        <span>Toma de Decisiones</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-item" data-target="about-section" id="nav-about">
+                        <i class="bi bi-info-circle-fill"></i>
+                        <span>Acerca del Proyecto</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="mt-auto p-3 text-center border-top border-secondary">
+                <small class="text-muted">Versión 1.0.0 (Local)</small>
+            </div>
+        </aside>
+
+        <!-- Overlay for mobile sidebar -->
+        <div class="sidebar-toggle-overlay"></div>
+
+        <!-- Main Content Wrapper -->
+        <div class="main-content">
+            
+            <!-- Top Navbar -->
+            <header class="top-navbar">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-dark d-lg-none" id="sidebar-toggle" aria-label="Abrir menú lateral">
+                        <i class="bi bi-list fs-4"></i>
+                    </button>
+                    <h1 class="h4 m-0 text-white fw-semibold">Dashboard Quant</h1>
+                </div>
+                <div class="d-flex align-items-center gap-4">
+                    <div class="d-none d-md-flex align-items-center gap-2 text-secondary">
+                        <i class="bi bi-circle-fill text-emerald small animate-pulse"></i>
+                        <span class="small font-monospace">Motor en línea</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Ticker Bar -->
+            <div class="ticker-wrap">
+                <div class="ticker" id="ticker-container">
+                    <!-- Loaded dynamically via js/app.js -->
+                </div>
+            </div>
+
+            <!-- Content Body (Dynamic Sections) -->
+            <div class="content-body">
+                <main>
+                    
+                    <!-- MODULE 1: DASHBOARD PRINCIPAL -->
+                    <section id="dashboard-section" class="fade-in-slide">
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-3">
+                                <div class="card-premium">
+                                    <div class="stat-icon icon-cyan">
+                                        <i class="bi bi-wallet2"></i>
+                                    </div>
+                                    <h6 class="text-secondary mb-1">Valor de Cartera</h6>
+                                    <h3 class="fw-bold mb-0 text-white">$126,500.00</h3>
+                                    <span class="text-emerald small"><i class="bi bi-arrow-up"></i> +26.5% YTD</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card-premium">
+                                    <div class="stat-icon icon-emerald">
+                                        <i class="bi bi-lightning-charge-fill"></i>
+                                    </div>
+                                    <h6 class="text-secondary mb-1">Sharpe Ratio Promedio</h6>
+                                    <h3 class="fw-bold mb-0 text-white">1.82</h3>
+                                    <span class="text-emerald small"><i class="bi bi-shield-check"></i> Riesgo Controlado</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card-premium">
+                                    <div class="stat-icon icon-amber">
+                                        <i class="bi bi-speedometer2"></i>
+                                    </div>
+                                    <h6 class="text-secondary mb-1">Volatilidad Anualizada</h6>
+                                    <h3 class="fw-bold mb-0 text-white">14.2%</h3>
+                                    <span class="text-secondary small">Basado en 4 activos</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card-premium">
+                                    <div class="stat-icon icon-rose">
+                                        <i class="bi bi-exclamation-triangle-fill"></i>
+                                    </div>
+                                    <h6 class="text-secondary mb-1">Max Drawdown Histórico</h6>
+                                    <h3 class="fw-bold mb-0 text-white">-8.4%</h3>
+                                    <span class="text-emerald small"><i class="bi bi-arrow-up"></i> Recuperado</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <div class="col-lg-8">
+                                <div class="card-premium">
+                                    <h5 class="text-white mb-3">Rendimiento Acumulado del Fondo</h5>
+                                    <div style="height: 350px;">
+                                        <canvas id="dashboardPerformanceChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card-premium">
+                                    <h5 class="text-white mb-3">Distribución de Activos Actual</h5>
+                                    <div style="height: 350px;">
+                                        <canvas id="dashboardAllocationChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- MODULE 2: OPTIMIZACIÓN DE RECURSOS (PROGRAMACIÓN LINEAL) -->
+                    <section id="optimization-section" class="d-none">
+                        <div class="row g-4">
+                            <!-- Left Panel: Problem Configuration -->
+                            <div class="col-xl-5 col-lg-6">
+                                <div class="card-premium d-flex flex-column gap-4">
+                                    <div>
+                                        <h5 class="text-white mb-1">Optimización de Recursos (Mezcla de Productos)</h5>
+                                        <p class="text-secondary small mb-3">Maximiza las ganancias configurando los precios y las restricciones de producción.</p>
+                                    </div>
+
+                                    <!-- Objective Function: Prices -->
+                                    <div>
+                                        <h6 class="text-white mb-2 fw-semibold">Función Objetivo: Ganancia Z = P<sub>A</sub>X + P<sub>B</sub>Y</h6>
+                                        <div class="row g-2">
+                                            <div class="col-6">
+                                                <label for="lp-price-a" class="small text-secondary mb-1">Precio Producto A (P<sub>A</sub>)</label>
+                                                <input type="number" id="lp-price-a" class="form-control form-control-premium" value="24000">
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="lp-price-b" class="small text-secondary mb-1">Precio Producto B (P<sub>B</sub>)</label>
+                                                <input type="number" id="lp-price-b" class="form-control form-control-premium" value="30000">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Constraint 1 -->
+                                    <div>
+                                        <h6 class="text-white mb-2 fw-semibold">Restricción 1: c<sub>11</sub>X + c<sub>12</sub>Y &le; R<sub>1</sub></h6>
+                                        <div class="row g-2">
+                                            <div class="col-4">
+                                                <label for="lp-c11" class="small text-secondary mb-1">Coeff X (c<sub>11</sub>)</label>
+                                                <input type="number" step="0.1" id="lp-c11" class="form-control form-control-premium" value="1.5">
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="lp-c12" class="small text-secondary mb-1">Coeff Y (c<sub>12</sub>)</label>
+                                                <input type="number" step="0.1" id="lp-c12" class="form-control form-control-premium" value="1">
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="lp-r1" class="small text-secondary mb-1">Límite (R<sub>1</sub>)</label>
+                                                <input type="number" id="lp-r1" class="form-control form-control-premium" value="300">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Constraint 2 -->
+                                    <div>
+                                        <h6 class="text-white mb-2 fw-semibold">Restricción 2: c<sub>21</sub>X + c<sub>22</sub>Y &le; R<sub>2</sub></h6>
+                                        <div class="row g-2">
+                                            <div class="col-4">
+                                                <label for="lp-c21" class="small text-secondary mb-1">Coeff X (c<sub>21</sub>)</label>
+                                                <input type="number" step="0.1" id="lp-c21" class="form-control form-control-premium" value="1">
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="lp-c22" class="small text-secondary mb-1">Coeff Y (c<sub>22</sub>)</label>
+                                                <input type="number" step="0.1" id="lp-c22" class="form-control form-control-premium" value="1.5">
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="lp-r2" class="small text-secondary mb-1">Límite (R<sub>2</sub>)</label>
+                                                <input type="number" id="lp-r2" class="form-control form-control-premium" value="300">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Non-negativity constraints info -->
+                                    <div class="bg-dark p-2 rounded text-center">
+                                        <code class="text-cyan small">Restricciones de no negatividad activas: X &ge; 0, Y &ge; 0</code>
+                                    </div>
+
+                                    <div class="row g-2">
+                                        <div class="col-7">
+                                            <button class="btn btn-premium-primary w-100" id="btn-run-optimization">
+                                                <i class="bi bi-calculator-fill"></i> Resolver
+                                            </button>
+                                        </div>
+                                        <div class="col-5">
+                                            <button class="btn btn-premium-secondary w-100" data-bs-toggle="modal" data-bs-target="#modal-instructivo">
+                                                <i class="bi bi-book-fill"></i> Instructivo
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Panel: Results, Procedure and Chart -->
+                            <div class="col-xl-7 col-lg-6">
+                                <div class="card-premium d-flex flex-column gap-3">
+                                    <h5 class="text-white m-0">Resolución Gráfica y Región Factible</h5>
+                                    
+                                    <!-- Results Metrics -->
+                                    <div class="row g-3 text-center">
+                                        <div class="col-4">
+                                            <div class="card bg-dark border-secondary p-2">
+                                                <div class="small text-secondary">Cant. Óptima A (X)</div>
+                                                <h4 class="fw-bold text-cyan mb-0" id="lp-opt-x">-</h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="card bg-dark border-secondary p-2">
+                                                <div class="small text-secondary">Cant. Óptima B (Y)</div>
+                                                <h4 class="fw-bold text-cyan mb-0" id="lp-opt-y">-</h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="card bg-dark border-secondary p-2">
+                                                <div class="small text-secondary">Ganancia Máxima (Z)</div>
+                                                <h4 class="fw-bold text-emerald mb-0" id="lp-opt-z">-</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Feasible Region Plot -->
+                                    <div style="height: 250px;">
+                                        <canvas id="lpFeasibleChart"></canvas>
+                                    </div>
+
+                                    <!-- Procedure detail -->
+                                    <div class="border-top border-secondary pt-2">
+                                        <h6 class="text-white mb-2">Procedimiento: Evaluación de Vértices</h6>
+                                        <div class="table-responsive">
+                                            <table class="table table-premium text-center align-middle font-monospace table-sm m-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Vértice (X, Y)</th>
+                                                        <th>Origen del Punto</th>
+                                                        <th>¿Es Factible?</th>
+                                                        <th class="text-emerald">Ganancia Z ($)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="lp-procedure-tbody">
+                                                    <!-- Dynamically filled via js/optimization.js -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                       <!-- MODULE 3: PRONÓSTICOS (REGRESIÓN MULTI-MODELO) -->
+                    <section id="forecasting-section" class="d-none">
+                        <div class="row g-4">
+                            <!-- Left Settings & Data Table -->
+                            <div class="col-lg-5">
+                                <div class="card-premium d-flex flex-column gap-3">
+                                    <div>
+                                        <h5 class="text-white mb-1">Entrada de Datos Históricos</h5>
+                                        <p class="text-secondary small mb-3">Agrega y administra los pares de datos (Año, Valor) para estimar las tendencias.</p>
+                                    </div>
+                                    
+                                    <!-- Add Data Form -->
+                                    <div class="row g-2 align-items-end mb-2">
+                                        <div class="col-5">
+                                            <label for="input-add-year" class="small text-secondary mb-1">Año (X)</label>
+                                            <input type="number" id="input-add-year" class="form-control form-control-premium" value="2025">
+                                        </div>
+                                        <div class="col-5">
+                                            <label for="input-add-value" class="small text-secondary mb-1">Valor (Y)</label>
+                                            <input type="number" id="input-add-value" class="form-control form-control-premium" value="5000">
+                                        </div>
+                                        <div class="col-2">
+                                            <button class="btn btn-premium-primary w-100 p-2" id="btn-add-datapoint" title="Agregar Punto">
+                                                <i class="bi bi-plus-lg"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Table of current data -->
+                                    <div style="max-height: 220px; overflow-y: auto;" class="border border-secondary rounded mb-3">
+                                        <table class="table table-premium text-center align-middle m-0 table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Año (X)</th>
+                                                    <th>Valor (Y)</th>
+                                                    <th>Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="forecast-data-tbody">
+                                                <!-- Dynamically filled via js/forecasting.js -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <button class="btn btn-premium-primary w-100" id="btn-run-forecast">
+                                                <i class="bi bi-play-fill"></i> Calcular
+                                            </button>
+                                        </div>
+                                        <div class="col-6">
+                                            <button class="btn btn-premium-secondary w-100" id="btn-load-class-example">
+                                                <i class="bi bi-journal-bookmark-fill"></i> Cargar Ejemplo
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Forecast Chart & Metrics -->
+                            <div class="col-lg-7">
+                                <div class="card-premium d-flex flex-column gap-3">
+                                    <h5 class="text-white m-0">Análisis y Ajuste de Modelos de Regresión</h5>
+                                    
+                                    <div style="height: 220px;">
+                                        <canvas id="forecastingChart"></canvas>
+                                    </div>
+
+                                    <!-- Model Cards: Linear, Quadratic, Exponential -->
+                                    <div class="row g-2" id="regression-cards-container">
+                                        <!-- Card Linear -->
+                                        <div class="col-md-4">
+                                            <div class="card bg-dark border-secondary p-2 h-100 transition-smooth" id="card-reg-linear">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <span class="small text-secondary fw-bold">Lineal</span>
+                                                    <span id="best-badge-linear" class="badge bg-emerald d-none">Mejor R²</span>
+                                                </div>
+                                                <div class="font-monospace x-small text-white text-truncate mb-2" id="eq-linear">y = -</div>
+                                                <div class="row g-0 align-items-center">
+                                                    <div class="col-6">
+                                                        <div class="x-small text-secondary">R²</div>
+                                                        <div class="small fw-bold text-cyan" id="r2-linear">-</div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="x-small text-secondary">Pron. N+1</div>
+                                                        <div class="small fw-bold text-light" id="pred-linear">-</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Card Quadratic -->
+                                        <div class="col-md-4">
+                                            <div class="card bg-dark border-secondary p-2 h-100 transition-smooth" id="card-reg-quadratic">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <span class="small text-secondary fw-bold">Cuadrática</span>
+                                                    <span id="best-badge-quadratic" class="badge bg-emerald d-none">Mejor R²</span>
+                                                </div>
+                                                <div class="font-monospace x-small text-white text-truncate mb-2" id="eq-quadratic">y = -</div>
+                                                <div class="row g-0 align-items-center">
+                                                    <div class="col-6">
+                                                        <div class="x-small text-secondary">R²</div>
+                                                        <div class="small fw-bold text-cyan" id="r2-quadratic">-</div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="x-small text-secondary">Pron. N+1</div>
+                                                        <div class="small fw-bold text-light" id="pred-quadratic">-</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Card Exponential -->
+                                        <div class="col-md-4">
+                                            <div class="card bg-dark border-secondary p-2 h-100 transition-smooth" id="card-reg-exponential">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <span class="small text-secondary fw-bold">Exponencial</span>
+                                                    <span id="best-badge-exponential" class="badge bg-emerald d-none">Mejor R²</span>
+                                                </div>
+                                                <div class="font-monospace x-small text-white text-truncate mb-2" id="eq-exponential">y = -</div>
+                                                <div class="row g-0 align-items-center">
+                                                    <div class="col-6">
+                                                        <div class="x-small text-secondary">R²</div>
+                                                        <div class="small fw-bold text-cyan" id="r2-exponential">-</div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="x-small text-secondary">Pron. N+1</div>
+                                                        <div class="small fw-bold text-light" id="pred-exponential">-</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Table of detailed results -->
+                                    <div class="table-responsive border-top border-secondary pt-2">
+                                        <table class="table table-premium text-center align-middle font-monospace table-sm m-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-start">Modelo</th>
+                                                    <th>Ecuación de Tendencia</th>
+                                                    <th>R²</th>
+                                                    <th id="th-pred-1">Pron. N+1</th>
+                                                    <th id="th-pred-2">Pron. N+2</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="regression-results-tbody">
+                                                <!-- Dynamically filled via js/forecasting.js -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- MODULE 4: TOMA DE DECISIONES -->
+                    <section id="decisions-section" class="d-none">
+                        <div class="row g-4">
+                            <!-- Left: Scenario Decision Analysis -->
+                            <div class="col-xl-6">
+                                <div class="card-premium d-flex flex-column">
+                                    <h5 class="text-white mb-1">Árbol de Decisión de Inversión</h5>
+                                    <p class="text-secondary small mb-3">Calcula el valor esperado de retorno ponderado por escenarios.</p>
+                                    
+                                    <div class="alert alert-warning d-none" id="scenario-warning"></div>
+
+                                    <div class="row g-3 mb-4">
+                                        <!-- Scenarios Input Group -->
+                                        <div class="col-md-4">
+                                            <div class="card bg-dark border-secondary p-3">
+                                                <h6 class="text-emerald mb-2 fw-semibold">Escenario Alcista</h6>
+                                                <div class="mb-2">
+                                                    <label class="small text-secondary mb-1">Probabilidad</label>
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="number" id="prob-bull" class="form-control form-control-premium" value="30">
+                                                        <span class="input-group-text bg-dark border-secondary text-secondary">%</span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <label class="small text-secondary mb-1">Retorno Est.</label>
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="number" id="ret-bull" class="form-control form-control-premium" value="25">
+                                                        <span class="input-group-text bg-dark border-secondary text-secondary">%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <div class="card bg-dark border-secondary p-3">
+                                                <h6 class="text-cyan mb-2 fw-semibold">Escenario Base</h6>
+                                                <div class="mb-2">
+                                                    <label class="small text-secondary mb-1">Probabilidad</label>
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="number" id="prob-base" class="form-control form-control-premium" value="50">
+                                                        <span class="input-group-text bg-dark border-secondary text-secondary">%</span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <label class="small text-secondary mb-1">Retorno Est.</label>
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="number" id="ret-base" class="form-control form-control-premium" value="8">
+                                                        <span class="input-group-text bg-dark border-secondary text-secondary">%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="card bg-dark border-secondary p-3">
+                                                <h6 class="text-rose mb-2 fw-semibold">Escenario Bajista</h6>
+                                                <div class="mb-2">
+                                                    <label class="small text-secondary mb-1">Probabilidad</label>
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="number" id="prob-bear" class="form-control form-control-premium" value="20">
+                                                        <span class="input-group-text bg-dark border-secondary text-secondary">%</span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <label class="small text-secondary mb-1">Retorno Est.</label>
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="number" id="ret-bear" class="form-control form-control-premium" value="-15">
+                                                        <span class="input-group-text bg-dark border-secondary text-secondary">%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row g-3 align-items-center mb-4">
+                                        <div class="col-md-4 border-end border-secondary text-center">
+                                            <div class="small text-secondary">Valor Esperado E(R)</div>
+                                            <h3 class="fw-bold text-white mb-0" id="scen-expected-return">-</h3>
+                                        </div>
+                                        <div class="col-md-4 border-end border-secondary text-center">
+                                            <div class="small text-secondary">Riesgo Escenario</div>
+                                            <h3 class="fw-bold text-white mb-0" id="scen-risk">-</h3>
+                                        </div>
+                                        <div class="col-md-4 text-center">
+                                            <div class="small text-secondary">Recomendación</div>
+                                            <div id="scen-recommendation">-</div>
+                                        </div>
+                                    </div>
+
+                                    <div style="height: 180px;" class="mt-auto">
+                                        <canvas id="scenarioChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Option Pricing - Black-Scholes -->
+                            <div class="col-xl-6">
+                                <div class="card-premium">
+                                    <h5 class="text-white mb-1">Valoración Black-Scholes (Cobertura de Riesgo)</h5>
+                                    <p class="text-secondary small mb-3">Estima el precio justo de opciones call/put y sus griegas para toma de decisiones.</p>
+
+                                    <!-- BS Fields -->
+                                    <div class="row g-3 mb-4">
+                                        <div class="col-md-4">
+                                            <label for="bs-s" class="form-label small">Precio de Acción (S)</label>
+                                            <input type="number" id="bs-s" class="form-control form-control-premium" value="100">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="bs-k" class="form-label small">Strike Price (K)</label>
+                                            <input type="number" id="bs-k" class="form-control form-control-premium" value="100">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="bs-t" class="form-label small">Vencimiento (Años) (T)</label>
+                                            <input type="number" step="0.01" id="bs-t" class="form-control form-control-premium" value="1">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="bs-r" class="form-label small">Tasa Libre Riesgo (r)</label>
+                                            <div class="input-group">
+                                                <input type="number" step="0.1" id="bs-r" class="form-control form-control-premium" value="5">
+                                                <span class="input-group-text bg-dark border-secondary text-secondary">%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="bs-v" class="form-label small">Volatilidad Implícita (&sigma;)</label>
+                                            <div class="input-group">
+                                                <input type="number" step="1" id="bs-v" class="form-control form-control-premium" value="20">
+                                                <span class="input-group-text bg-dark border-secondary text-secondary">%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Output Prices -->
+                                    <div class="row g-3 mb-4 text-center">
+                                        <div class="col-6">
+                                            <div class="card bg-emerald-opaque p-3 border border-emerald">
+                                                <h6 class="text-emerald small mb-1 fw-bold">Precio Teórico CALL</h6>
+                                                <h3 class="text-white fw-bold mb-0" id="bs-call-price">-</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="card bg-rose-opaque p-3 border border-rose">
+                                                <h6 class="text-rose small mb-1 fw-bold">Precio Teórico PUT</h6>
+                                                <h3 class="text-white fw-bold mb-0" id="bs-put-price">-</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Greeks Table -->
+                                    <h6 class="text-white mb-2">Griegas de Sensibilidad</h6>
+                                    <table class="table table-premium text-center align-middle font-monospace table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Griega</th>
+                                                <th>Fórmula / Significado</th>
+                                                <th class="text-emerald">CALL</th>
+                                                <th class="text-rose">PUT</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-light fw-bold">Delta (&Delta;)</td>
+                                                <td class="text-secondary small text-start">Sensibilidad al precio de la acción</td>
+                                                <td id="bs-call-delta" class="text-emerald">-</td>
+                                                <td id="bs-put-delta" class="text-rose">-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-light fw-bold">Gamma (&gamma;)</td>
+                                                <td class="text-secondary small text-start">Tasa de cambio de Delta</td>
+                                                <td id="bs-gamma" colspan="2" class="text-white">-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-light fw-bold">Vega (&nu;)</td>
+                                                <td class="text-secondary small text-start">Sensibilidad a la volatilidad (+1%)</td>
+                                                <td id="bs-vega" colspan="2" class="text-white">-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-light fw-bold">Theta (&theta;)</td>
+                                                <td class="text-secondary small text-start">Decaimiento temporal diario</td>
+                                                <td id="bs-call-theta" class="text-emerald">-</td>
+                                                <td id="bs-put-theta" class="text-rose">-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- MODULE 5: ACERCA DEL PROYECTO -->
+                    <section id="about-section" class="d-none">
+                        <div class="row g-4 justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="card-premium">
+                                    <h5 class="text-white mb-4"><i class="bi bi-info-circle-fill text-cyan"></i> Acerca del Proyecto</h5>
+                                    
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <span class="text-secondary small d-block">Asignatura</span>
+                                                <span class="text-white fw-bold fs-5">Informática y Métodos Cuantitativos</span>
+                                            </div>
+                                            <div class="mb-3">
+                                                <span class="text-secondary small d-block">Programa</span>
+                                                <span class="text-white fw-bold fs-5">Administración Financiera</span>
+                                            </div>
+                                            <div class="mb-3">
+                                                <span class="text-secondary small d-block">Autor</span>
+                                                <span class="text-white fw-bold fs-5">Leonardo Javier Bastidas Moreno</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <span class="text-secondary small d-block">Objetivo</span>
+                                                <p class="text-white fs-6">Integrar programación lineal, pronósticos y toma de decisiones mediante herramientas tecnológicas.</p>
+                                            </div>
+                                            <div class="mb-3">
+                                                <span class="text-secondary small d-block">Tecnologías Utilizadas</span>
+                                                <div class="d-flex flex-wrap gap-2 mt-2">
+                                                    <span class="badge bg-dark border border-secondary text-cyan px-3 py-2">HTML5</span>
+                                                    <span class="badge bg-dark border border-secondary text-cyan px-3 py-2">JavaScript Vanilla</span>
+                                                    <span class="badge bg-dark border border-secondary text-cyan px-3 py-2">Bootstrap 5</span>
+                                                    <span class="badge bg-dark border border-secondary text-cyan px-3 py-2">GitHub Pages</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </main>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap Bundle JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Modules Scripts -->
+    <script src="js/optimization.js"></script>
+    <script src="js/forecasting.js"></script>
+    <script src="js/decisions.js"></script>
+    <!-- Modal: Instructivo de Programación Lineal -->
+    <div class="modal fade modal-premium" id="modal-instructivo" tabindex="-1" aria-labelledby="modalInstructivoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title d-flex align-items-center gap-2 text-white" id="modalInstructivoLabel">
+                        <i class="bi bi-book-fill text-cyan"></i>
+                        Instructivo de Programación Lineal (Método Gráfico)
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4">
+                        <!-- Left: Steps -->
+                        <div class="col-md-6 border-end border-secondary">
+                            <h6 class="text-cyan fw-bold mb-3"><i class="bi bi-list-ol"></i> Pasos para el Modelado</h6>
+                            <ul class="list-unstyled d-flex flex-column gap-3 text-secondary">
+                                <li>
+                                    <span class="badge bg-dark border border-secondary text-cyan px-2 py-1 me-2">PASO 1</span>
+                                    <strong class="text-white">Precios de los Productos:</strong>
+                                    <p class="small mb-0 ms-4 ps-2">Define las ganancias por unidad (coeficientes de la Función Objetivo Z).</p>
+                                </li>
+                                <li>
+                                    <span class="badge bg-dark border border-secondary text-cyan px-2 py-1 me-2">PASO 2</span>
+                                    <strong class="text-white">Coeficientes de Recursos:</strong>
+                                    <p class="small mb-0 ms-4 ps-2">Ingresa el consumo tecnológico de cada recurso por unidad de producto (c₁₁ y c₁₂).</p>
+                                </li>
+                                <li>
+                                    <span class="badge bg-dark border border-secondary text-cyan px-2 py-1 me-2">PASO 3</span>
+                                    <strong class="text-white">Límites Disponibles:</strong>
+                                    <p class="small mb-0 ms-4 ps-2">Fija la capacidad o recursos máximos para cada restricción (R₁ y R₂).</p>
+                                </li>
+                                <li>
+                                    <span class="badge bg-dark border border-secondary text-cyan px-2 py-1 me-2">PASO 4</span>
+                                    <strong class="text-white">Resolver:</strong>
+                                    <p class="small mb-0 ms-4 ps-2">Presiona "Resolver" para calcular los vértices intersección automáticamente.</p>
+                                </li>
+                                <li>
+                                    <span class="badge bg-dark border border-secondary text-cyan px-2 py-1 me-2">PASO 5</span>
+                                    <strong class="text-white">Región Factible:</strong>
+                                    <p class="small mb-0 ms-4 ps-2">Interpreta la zona sombreada común donde se cumplen todas las inecuaciones.</p>
+                                </li>
+                                <li>
+                                    <span class="badge bg-dark border border-secondary text-cyan px-2 py-1 me-2">PASO 6</span>
+                                    <strong class="text-white">Solución Óptima:</strong>
+                                    <p class="small mb-0 ms-4 ps-2">Identifica el vértice que maximiza la ganancia total, destacado en el gráfico.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Right: Example Case -->
+                        <div class="col-md-6">
+                            <h6 class="text-amber fw-bold mb-3"><i class="bi bi-box-fill"></i> Caso de Ejemplo: Mezcla de Tortas</h6>
+                            <p class="small text-secondary">
+                                Imagina un taller de repostería que produce dos tipos de tortas gourmet (Producto A y Producto B) sujeto a horas de horno y horas de decoración disponibles:
+                            </p>
+                            
+                            <div class="bg-dark p-3 rounded border border-secondary mb-3">
+                                <ul class="list-unstyled small mb-0 text-light d-flex flex-column gap-2">
+                                    <li><strong>Precios de Venta:</strong></li>
+                                    <li class="ps-3 text-secondary">&bull; Torta A (Ganancia): <span class="text-cyan">$24,000</span></li>
+                                    <li class="ps-3 text-secondary">&bull; Torta B (Ganancia): <span class="text-cyan">$30,000</span></li>
+                                    
+                                    <li class="mt-2"><strong>Recurso 1 (Horno):</strong> <span class="text-amber">1.5X + Y &le; 300 hrs</span></li>
+                                    <li class="ps-3 text-secondary">&bull; Cada Torta A consume 1.5 horas.</li>
+                                    <li class="ps-3 text-secondary">&bull; Cada Torta B consume 1.0 hora.</li>
+                                    
+                                    <li class="mt-2"><strong>Recurso 2 (Decoración):</strong> <span class="text-amber">X + 1.5Y &le; 300 hrs</span></li>
+                                    <li class="ps-3 text-secondary">&bull; Cada Torta A consume 1.0 hora.</li>
+                                    <li class="ps-3 text-secondary">&bull; Cada Torta B consume 1.5 horas.</li>
+                                </ul>
+                            </div>
+                            
+                            <p class="small text-secondary">
+                                Al ingresar estos valores, el solver calculará la combinación óptima (intersección de las dos restricciones) en <strong>120 unidades de A y 120 de B</strong>, logrando un beneficio máximo de <strong>$6,480,000</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-premium-primary px-4" data-bs-dismiss="modal">Entendido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
